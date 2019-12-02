@@ -36,6 +36,7 @@ function onRequest(request, response){
         response.writeHead(200);
         console.log(queryData);
         console.log(queryData.sendNum,queryData.white,queryData.black);
+        ArdoinoPort.write(queryData.sendNum+'\n');
     }
  
     if(request.method == 'GET' && _url == '/'){
