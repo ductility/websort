@@ -89,17 +89,21 @@
                 if(class2>background){sendNum=2}
                 if(class2<background){sendNum=0}
             }
-
-            if(oldNum==0){
-                if(sendNum == 1){
-                    white +=1;
+            if(oldNum != sendNum){
+                if(oldNum==0){
+                    if(sendNum == 1){
+                        white +=1;
+                        $.get("/?sendNum="+sendNum+"&white="+white+"&black="+black, function(data, status){ });
+                    }
+                    else if(sendNum == 2 ){
+                        black +=1;
+                        $.get("/?sendNum="+sendNum+"&white="+white+"&black="+black, function(data, status){ });
+                    }
                 }
-                else if(sendNum == 2 ){
-                    black +=1;
-                }
+                $.get("/?sendNum="+sendNum+"&white="+white+"&black="+black, function(data, status){ });
             }
             console.log("white:",white,"black:",black);
-            $.get("/?sendNum="+sendNum+"&white="+white+"&black="+black);
+            // $.get("/?sendNum="+sendNum+"&white="+white+"&black="+black, function(data, status){ });
             //$.get("/" + sendNum, function(data, status){ });
             oldNum = sendNum;
         }

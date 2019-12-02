@@ -35,31 +35,22 @@ function onRequest(request, response){
     if(request.method == 'GET' && queryData.sendNum !=null){
         response.writeHead(200);
         console.log(queryData);
-        console.log(queryData.sendNum,queryData.white,queryData.black);
         ArdoinoPort.write(queryData.sendNum+'\n');
+        //white black 데이터 보내기
+        var DataObj = {white : queryData.white, black: queryData.black};
+        Request.post({
+            headers: {'content-type': 'application/json'},
+            url : 'http://sior2.run.goorm.io/',
+            body : DataObj,
+            json: true
+        },
+        function(error,res){}
+        );
     }
  
     if(request.method == 'GET' && _url == '/'){
         response.writeHead(200,{"Content-Type":"text/html"}); // 웹페이지 출력
         fs.createReadStream("./index.html").pipe(response); // 같은 디렉토리에 있는 index.html를 response 함
-        
-    }else if(request.method == 'GET' && _url == '/0'){
-        response.writeHead(200,{"Content-Type":"text/html"}); //view열기
-        //fs.createReadStream("./index.html").pipe(response);
-        console.log('0');
-        ArdoinoPort.write('0\n');
-    
-    }else if(request.method == 'GET' && _url == '/1'){
-        response.writeHead(200,{"Content-Type":"text/html"}); //view열기
-        //fs.createReadStream("./index.html").pipe(response);
-        console.log('1');
-        ArdoinoPort.write('1\n');
- 
-    }else if(request.method == 'GET' && _url == '/2'){
-        response.writeHead(200,{"Content-Type":"text/html"}); //view열기
-        //fs.createReadStream("./index.html").pipe(response);
-        console.log('2');
-        ArdoinoPort.write('2\n');
  
     }else {
         // file이 존재 하지않을때,
@@ -67,19 +58,6 @@ function onRequest(request, response){
  
     } 
 }
-
-    var whiteNum = null;
-    var blackNum = null;
-    //white black 데이터 보내기
-    var DataObj = {white : whiteNum, black: blackNum};
-    Request.post({
-        headers: {'content-type': 'application/json'},
-        url : 'http://sior2.run.goorm.io/',
-        body : DataObj,
-        json: true
-    },
-    function(error,res){}
-    );
 
 
 
