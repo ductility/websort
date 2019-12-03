@@ -12,8 +12,7 @@ function send404Message(response){
 }
 
 //serialPort 설정
-
-var ArdoinoPort = new serialPort('COM6',{
+var ArdoinoPort = new serialPort('COM4',{
     baudRate : 9600,
     // defaults for Arduino serial communication
     dataBits : 8,
@@ -51,15 +50,11 @@ function onRequest(request, response){
     if(request.method == 'GET' && _url == '/'){
         response.writeHead(200,{"Content-Type":"text/html"}); // 웹페이지 출력
         fs.createReadStream("./index.html").pipe(response); // 같은 디렉토리에 있는 index.html를 response 함
- 
     }else {
         // file이 존재 하지않을때,
         send404Message(response);
- 
     } 
 }
-
-
 
 
 var Myport = 8000;
