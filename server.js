@@ -11,8 +11,9 @@ function send404Message(response){
     response.end();
 }
 
+//*******************************COM포트 확인!!!********************************************** */
 //serialPort 설정
-var ArdoinoPort = new serialPort('COM4',{
+var ArdoinoPort = new serialPort('COM3',{
     baudRate : 9600,
     // defaults for Arduino serial communication
     dataBits : 8,
